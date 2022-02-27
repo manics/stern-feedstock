@@ -17,6 +17,7 @@ jobs:
     defaults:
       run:
         # Needed for conda activation
+        # https://github.com/conda-incubator/setup-miniconda/blob/v2.1.1/README.md#IMPORTANT
         shell: bash -l {0}
     steps:
 
@@ -47,11 +48,10 @@ jobs:
         # c:\\conda-bld seems to work.... for now
         run: |
           if [ ${{ matrix.os }} = windows-latest ]; then
-            echo "::set-output name=condabld::c:\\conda-bld"
+            echo "::set-output name=condabld::c:/conda-bld"
           else
             echo "::set-output name=condabld::$HOME/conda-bld"
           fi
-        shell: bash
 
       - run: |
           mkdir ${{ steps.condablddir.outputs.condabld }}
